@@ -12,9 +12,10 @@ make all # build, run test, and dump optimized assembly code for transpose
 make run # build, run test
 make build # build test executable
 make asm # dump optimized assembly code for transpose
+make clean
 ```
 
-Use `make clean` to clear compiler outputs.
+`make build` outputs to `build/`, `make asm` outputs to `asm/`.
 
 ## Contents
 
