@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <xbyak/xbyak.h>
+//#include "parameters.h"
+
+struct Code : Xbyak::CodeGenerator {
+    Code(int x)
+    {
+        mov(eax, x);
+        ret();
+    }
+};
+
+int main() {
+	Code c(5);
+	int (*f)() = c.getCode<int (*)()>();
+	printf("ret=%d\n", f()); // ret = 5
+
+	printf("Hello world\n");
+}
