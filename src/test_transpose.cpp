@@ -1,7 +1,7 @@
 #include <iostream>
 #include "parameters.h"
-#include "xpose.h"
-#include "test_xpose.h"
+#include "transpose.h"
+#include "test_transpose.h"
 
 /**
  * A collection of test routines for matrix transpose

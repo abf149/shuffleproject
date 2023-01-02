@@ -1,6 +1,6 @@
 #include <immintrin.h>
 #include <cassert>
-#include "xpose.h"
+#include "transpose.h"
 
 /* Wrapper for in-place in-register SIMD 16x16 matrix transpose */
 void simd_square_transpose_intrinsic_16x16(int m, int k, DATA_TYPE* a, int lda) {

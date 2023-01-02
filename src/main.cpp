@@ -1,5 +1,5 @@
 #include <iostream>
-#include "test_xpose.h"
+#include "test_transpose.h"
 
 int main() {
     //test_print_naive_square_transpose();
