@@ -1,0 +1,3 @@
+source ${INTEL_PATH}setvars.sh
+${CXX} ${INCLUDE_PATH_FLAGS} ${ASM_DUMP_FLAGS} ${SOURCE_DIR}${ASM_DUMP_SOURCE} 
+#cp *.s ${ASM_DIR}
