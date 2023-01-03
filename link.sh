@@ -1,7 +1,6 @@
 source ${INTEL_PATH}setvars.sh
-${CXX} ${CXX_FLAGS} ${INCLUDE_PATH_FLAGS} ${CXX_SOURCES} ${FLAME_GEMM_SOURCE_FILES}
+${CXX} ${LINK_FLAGS} ${CXX_SOURCES} ${FLAME_GEMM_SOURCE_FILES}
 
-echo ${CXX_SOURCES}
 
 # rm test_xpose.out
 
