@@ -6,6 +6,7 @@ struct Code : Xbyak::CodeGenerator {
     Code(int x)
     {
         mov(eax, x);
+        vmovaps(zmm0|k0, ptr[rax]);
         ret();
     }
 };

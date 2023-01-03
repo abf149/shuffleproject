@@ -18,10 +18,13 @@ ASM_DUMP_SOURCE := intrinsic_transpose.cpp
 BUILD_DIR := build/
 EXE_FILE := test_transpose.out
 ASM_DIR := asm/
-BUILD_FLAGS := -O3 -xCore-AVX512 -qopt-zmm-usage=high
+CXX_FLAGS := -O3 -xCore-AVX512 -qopt-zmm-usage=high -c
+C_FLAGS := -O3 -xCore-AVX512 -qopt-zmm-usage=high -c
+JIT_CXX_FLAGS := -O3 -c
+LINK_FLAGS := -O3 -L
 ASM_DUMP_FLAGS := -O3 -g3 -xCore-AVX512 -qopt-zmm-usage=high -S
 
-CXX_SOURCES := $(shell find $(SOURCE_DIR) -name '*.cpp')
+CXX_SOURCES := $(filter-out $(SOURCE_DIR)/jit_transpose.cpp,$(shell find $(SOURCE_DIR) -name '*.cpp'))
 C_SOURCES := $(shell find $(SOURCE_DIR) -name '*.c')
 ASM_DUMP_FILEPATH := ${ASM_DIR}$(filter %.s,$(ASM_DUMP_SOURCE:.cpp=.s))
 
@@ -34,10 +37,22 @@ build: ${BUILD_DIR}${EXE_FILE}
 
 asm: ${ASM_DUMP_FILEPATH}
 
+#$(CXX_SOURCES:.cpp=.o):
+#	./build_cxx.sh
 
-${BUILD_DIR}${EXE_FILE}:
+#$(C_SOURCES:.cpp=.o):
+#	./build_c.sh
+
+*.o:
+	./build_cxx.sh
+	./build_c.sh
+
+#jit_transpose.o:
+#	g++ -O3 src/jit_transpose.cpp
+
+${BUILD_DIR}${EXE_FILE}: *.o
 	mkdir -p ${BUILD_DIR}
-	./build.sh
+	gcc $(LINK_FLAGS) -o  $@ $^
 
 ${ASM_DUMP_FILEPATH}:
 	mkdir -p ${ASM_DIR}
